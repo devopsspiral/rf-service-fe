@@ -1,5 +1,11 @@
 # rf-service-fe
 
+## Quick start
+
+```
+docker run -d --rm -p 8080:8080 m-wcislo/rf-service-fe:0.1.0
+```
+
 ## Project setup
 ```
 npm install
