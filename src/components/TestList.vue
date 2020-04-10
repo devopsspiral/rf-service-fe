@@ -1,9 +1,5 @@
 <template>
 <div>
-    <!-- <button v-on:click="discover">Discover</button> -->
-      <div></div>
-      <!-- <input type="checkbox" :name="name" :value="name" :style="indent">
-      <label :for="name" :style="indent" @click="toggleChildren">{{ name }}</label> -->
       <div :style="indent" @click="toggleChildren">{{ name }}</div>
       <div v-if="showChildren">
       <test-list
@@ -19,8 +15,6 @@
 </template>
 
 <script>
-  import axios from 'axios';
-
   export default {
     name: 'test-list',
     props: ['name', 'children', 'indentation'],
@@ -39,14 +33,6 @@
     toggleChildren() {
       this.showChildren = !this.showChildren;
     },
-    discover() {
-      axios
-        .get('http://127.0.0.1:5000/tests')
-        .then(res => {
-          this.tests = res.data;
-        })
-        .catch(error => console.log(error));
-    }
   }
   }
 </script>

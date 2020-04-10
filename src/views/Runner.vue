@@ -1,13 +1,13 @@
 <template>
 <div>
-    <button v-on:click="discover">Discover</button>
+    <button v-on:click="runTests">Run All</button>
     <div id="tests"><test-list :children="tests" :indentation="0"></test-list></div>
     
 </div> 
 </template>
 
 <script>
-  import TestList from './TestList.vue'
+  import TestList from '@/components/TestList.vue'
   import axios from 'axios';
 
   export default {
@@ -20,17 +20,27 @@
         tests: [],
       };
     },
-    methods: {
-    discover() {
+    created: function() {
+      axios.defaults.baseURL = location.protocol + '//' + location.hostname ;
       axios
-        .get('http://127.0.0.1:5000/tests')
+        .get('/api/tests')
         .then(res => {
           this.tests = res.data;
         })
         .catch(error => console.log(error));
+    },
+    methods: {
+    runTests() {
+      axios
+        .post('/api/run')
+        .then((error) => {
+          console.log(error)
+        }
+        )
+    }
     }
   }
-  }
+  
 </script>
 
 <style>

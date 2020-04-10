@@ -44,28 +44,29 @@
       };
     },
     created: function() {
+      axios.defaults.baseURL = location.protocol + '//' + location.hostname;
       axios
-        .get('http://127.0.0.1:5000/publishers_conf')
+        .get('/api/publishers_conf')
         .then(res => {
           this.publisherConfig = res.data;
           this.selectedPublisher = this.publisherConfig.type
         })
         .catch(error => console.log(error));
       axios
-        .get('http://127.0.0.1:5000/publishers')
+        .get('/api/publishers')
         .then(res => {
           this.publishers = res.data;
         })
         .catch(error => console.log(error))
       axios
-        .get('http://127.0.0.1:5000/fetchers_conf')
+        .get('/api/fetchers_conf')
         .then(res => {
           this.fetcherConfig = res.data;
           this.selectedFetcher = this.fetcherConfig.type
         })
         .catch(error => console.log(error));
       axios
-        .get('http://127.0.0.1:5000/fetchers')
+        .get('/api/fetchers')
         .then(res => {
           this.fetchers = res.data;
         })
@@ -73,18 +74,20 @@
     },
     methods: {
     handlePublisherSubmit() {
+      axios.defaults.baseURL = location.protocol + '//' + location.hostname;
       this.publisherConfig.type = this.selectedPublisher
       axios
-        .post('http://127.0.0.1:5000/publishers_conf', this.publisherConfig)
+        .post('/api/publishers_conf', this.publisherConfig)
         .then((error) => {
           console.log(error)
         }
         )
     },
     handleFetcherSubmit() {
+      axios.defaults.baseURL = location.protocol + '//' + location.hostname;
       this.fetcherConfig.type = this.selectedFetcher
       axios
-        .post('http://127.0.0.1:5000/fetchers_conf', this.fetcherConfig)
+        .post('/api/fetchers_conf', this.fetcherConfig)
         .then((error) => {
           console.log(error)
         }
